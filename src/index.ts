@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import { LogData, RejectionValue } from "./types/types";
 import { responseSchema } from "./types/schemas";
 import { ZodError } from "zod";
@@ -7,7 +7,7 @@ export default class Flytrap {
   private projectId: string;
   private apiEndpoint: string;
   private apiKey: string;
-  
+
   constructor(config: {
     projectId: string;
     apiEndpoint: string;
@@ -21,10 +21,10 @@ export default class Flytrap {
 
   // * --- Private Methods --- * //
   private setupGlobalErrorHandlers(): void {
-    window.addEventListener("error", (e: ErrorEvent) => 
+    window.addEventListener("error", (e: ErrorEvent) =>
       this.handleUncaughtException(e),
     );
-    window.addEventListener("unhandledrejection", (e: PromiseRejectionEvent) => 
+    window.addEventListener("unhandledrejection", (e: PromiseRejectionEvent) =>
       this.handleUnhandledRejection(e),
     );
   }
@@ -45,7 +45,10 @@ export default class Flytrap {
     }
   }
 
-  private async logRejection(value: RejectionValue, handled: boolean): Promise<void> {
+  private async logRejection(
+    value: RejectionValue,
+    handled: boolean,
+  ): Promise<void> {
     const data: LogData = {
       value,
       handled,
@@ -54,20 +57,23 @@ export default class Flytrap {
     };
 
     try {
-      console.log('[error sdk] Sending rejection to backend...');
+      console.log("[error sdk] Sending rejection to backend...");
       const response = await axios.post(
         `${this.apiEndpoint}/api/errors`,
         { data },
-        { headers: { "x-api-key": this.apiKey } }
+        { headers: { "x-api-key": this.apiKey } },
       );
       responseSchema.parse(response);
-      console.log('[error sdk]', response.status, response.data);
+      console.log("[flytrap]", response.status, response.data);
     } catch (e) {
       if (e instanceof ZodError) {
-        console.error('[error sdk] Response validation error:', e.errors);
+        console.error("[flytrap] Response validation error:", e.errors);
       } else {
-        console.error('[error sdk] An error occurred sending rejection data:', e);
-        throw new Error('An error occurred logging rejection data.');
+        console.error(
+          "[error sdk] An error occurred sending rejection data:",
+          e,
+        );
+        throw new Error("An error occurred logging rejection data.");
       }
     }
   }
@@ -88,16 +94,16 @@ export default class Flytrap {
       const response = await axios.post(
         `${this.apiEndpoint}/api/errors`,
         { data },
-        { headers: { "x-api-key": this.apiKey } }
+        { headers: { "x-api-key": this.apiKey } },
       );
       responseSchema.parse(response);
-      console.log('[error sdk]', response.status, response.data);
+      console.log("[flytrap]", response.status, response.data);
     } catch (e) {
       if (e instanceof ZodError) {
-        console.error('[error sdk] Response validation error:', e.errors);
+        console.error("[flytrap] Response validation error:", e.errors);
       } else {
-        console.error('[error sdk] An error occurred sending error data:', e);
-        throw new Error('An error occurred logging error data.');
+        console.error("[flytrap] An error occurred sending error data:", e);
+        throw new Error("An error occurred logging error data.");
       }
     }
   }
