@@ -24,8 +24,8 @@ export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoun
     return { hasError: true };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-
+  componentDidCatch(error: Error, info: ErrorInfo): void {
+    this.flytrap.handleErrorBoundaryError(error, info.componentStack);
   }
 
   render() {

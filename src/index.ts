@@ -23,6 +23,10 @@ export default class Flytrap {
     this.logError(e, true);
   }
 
+  public handleErrorBoundaryError(error: Error, stack: string | null | undefined ): void {
+    this.logError(error, false);
+  }
+
   // * --- Private Methods --- * //
   private setupGlobalErrorHandlers(): void {
     window.addEventListener("error", (e: ErrorEvent) =>
