@@ -23,4 +23,20 @@ export default class Flytrap {
       this.handleUnhandledRejection(e),
     );
   }
+
+  private handleUncaughtException(e: ErrorEvent): void {
+    if (e.error) {
+      this.logError(e.error, false);
+    }
+  }
+
+  private handleUnhandledRejection(e: PromiseRejectionEvent): void {
+    const { reason } = e;
+
+    if (reason instanceof Error) {
+      this.logError(reason, false);
+    } else {
+      this.logRejection(reason, false);
+    }
+  }
 }
