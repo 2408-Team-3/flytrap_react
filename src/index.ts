@@ -19,6 +19,10 @@ export default class Flytrap {
     this.setupGlobalErrorHandlers();
   }
 
+  public captureException(e: Error): void {
+    this.logError(e, true);
+  }
+
   // * --- Private Methods --- * //
   private setupGlobalErrorHandlers(): void {
     window.addEventListener("error", (e: ErrorEvent) =>
