@@ -1,4 +1,5 @@
 import axios from "axios";
+import sourceMapSupport from 'source-map-support';
 import { LogData, RejectionValue } from "./types/types";
 import { responseSchema } from "./types/schemas";
 import { ZodError } from "zod";
@@ -17,6 +18,7 @@ export default class Flytrap {
     this.apiEndpoint = config.apiEndpoint;
     this.apiKey = config.apiKey;
     this.setupGlobalErrorHandlers();
+    sourceMapSupport.install({ environment: 'browser' })
   }
 
   public captureException(e: Error): void {
@@ -24,6 +26,7 @@ export default class Flytrap {
   }
 
   public handleErrorBoundaryError(error: Error, stack: string | null | undefined ): void {
+    console.log('from handleErrorBoundaryError - stack: ', stack);
     this.logError(error, false);
   }
 
