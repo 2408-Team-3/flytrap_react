@@ -112,7 +112,7 @@ class Flytrap {
     try {
       console.log("[error sdk] Sending rejection to backend...");
       const response = await axios.post(
-        `${this.apiEndpoint}/api/errors`,
+        `${this.apiEndpoint}/api/rejections`,
         { data },
         { headers: { "x-api-key": this.apiKey } },
       );
