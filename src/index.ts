@@ -1,10 +1,10 @@
 import axios from "axios";
-import sourceMapSupport from 'source-map-support';
+import sourceMapSupport from "source-map-support";
 import { LogData, RejectionValue } from "./types/types";
 import { responseSchema } from "./types/schemas";
 import { FlytrapError } from "./utils/FlytrapError";
 import { ZodError } from "zod";
-import { ErrorBoundary } from './ErrorBoundary';
+import { ErrorBoundary } from "./ErrorBoundary";
 
 class Flytrap {
   private projectId: string;
@@ -20,15 +20,18 @@ class Flytrap {
     this.apiEndpoint = config.apiEndpoint;
     this.apiKey = config.apiKey;
     this.setupGlobalErrorHandlers();
-    sourceMapSupport.install({ environment: 'browser' })
+    sourceMapSupport.install({ environment: "browser" });
   }
 
   public captureException(e: Error): void {
     this.logError(e, true);
   }
 
-  public handleErrorBoundaryError(error: Error, stack: string | null | undefined ): void {
-    console.log('from handleErrorBoundaryError - stack: ', stack);
+  public handleErrorBoundaryError(
+    error: Error,
+    stack: string | null | undefined,
+  ): void {
+    console.log("from handleErrorBoundaryError - stack: ", stack);
     this.logError(error, false);
   }
 

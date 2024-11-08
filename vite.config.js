@@ -1,28 +1,28 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import dts from 'vite-plugin-dts';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [react(), dts()],
   resolve: {
     alias: {
-      path: 'path-browserify', 
+      path: "path-browserify",
     },
   },
   build: {
     lib: {
-      entry: './src/index.ts',
-      name: 'Flytrap',
+      entry: "./src/index.ts",
+      name: "Flytrap",
       fileName: (format) => `index.${format}.js`,
-      formats: ['es', 'cjs'],
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
       external: [
-        'react', // Exclude React from the bundle
+        "react", // Exclude React from the bundle
       ],
       output: {
         globals: {
-          react: 'React',
+          react: "React",
         },
       },
     },

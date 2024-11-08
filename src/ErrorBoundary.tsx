@@ -1,17 +1,20 @@
 import React, { ErrorInfo, ReactNode } from "react";
-import Flytrap from "./index"; 
+import Flytrap from "./index";
 
 interface ErrorBoundaryProps {
-  flytrap: Flytrap,
-  children: ReactNode,
-  fallback?: ReactNode,
+  flytrap: Flytrap;
+  children: ReactNode;
+  fallback?: ReactNode;
 }
 
 interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends React.Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   private flytrap: Flytrap;
 
   constructor(props: ErrorBoundaryProps) {
