@@ -1,7 +1,12 @@
 {
   "name": "flytrap_react",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "exports": {
+    "require": "./dist/index.cjs.js",
+    "import": "./dist/index.es.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,22 +15,25 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@vitejs/plugin-react": "^4.3.3",
     "axios": "^1.7.7",
+    "path-browserify": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "source-map-support": "^0.5.21",
+    "vite": "^5.4.10",
+    "vite-plugin-dts": "^4.3.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/node": "^22.9.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/source-map-support": "^0.5.10",
     "@typescript-eslint/eslint-plugin": "^8.13.0",
     "@typescript-eslint/parser": "^8.13.0",
     "eslint": "^9.14.0",
     "prettier": "^3.3.3",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3",
-    "webpack": "^5.96.1",
-    "webpack-cli": "^5.1.4"
+    "typescript": "^5.6.3"
   }
 }
