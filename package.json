@@ -8,7 +8,7 @@
     "import": "./dist/index.es.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
@@ -22,8 +22,7 @@
     "react-dom": "^18.3.1",
     "source-map-support": "^0.5.21",
     "vite": "^5.4.10",
-    "vite-plugin-dts": "^4.3.0",
-    "zod": "^3.23.8"
+    "vite-plugin-dts": "^4.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",
