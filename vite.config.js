@@ -4,17 +4,12 @@ import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [react(), dts()],
-  resolve: {
-    alias: {
-      path: "path-browserify",
-    },
-  },
   build: {
     lib: {
       entry: "./src/index.ts",
-      name: "Flytrap",
-      fileName: (format) => `index.${format}.js`,
-      formats: ["es", "cjs"],
+      name: "flytrap",
+      fileName: "index",
+      formats: ["es"],
     },
     rollupOptions: {
       external: [

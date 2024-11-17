@@ -1,8 +1,8 @@
 import React, { ErrorInfo, ReactNode } from "react";
-import Flytrap from "./index";
+import { logError } from "../logger/logError";
+import loggedErrors from "../shared/loggedErrors";
 
 interface ErrorBoundaryProps {
-  flytrap: Flytrap;
   children: ReactNode;
   fallback?: ReactNode;
 }
@@ -15,12 +15,10 @@ export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
-  private flytrap: Flytrap;
 
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
-    this.flytrap = props.flytrap;
   }
 
   static getDerivedStateFromError(_: Error): ErrorBoundaryState {
@@ -28,12 +26,14 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
-    this.flytrap.handleErrorBoundaryError(error, info.componentStack);
+    console.error("[flytrap] Error caught in boundary:", info);
+    loggedErrors.add(error);
+    logError(error, false);
   }
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback;
+      return this.props.fallback || <h1>Something went wrong.</h1>;;
     }
 
     return this.props.children;

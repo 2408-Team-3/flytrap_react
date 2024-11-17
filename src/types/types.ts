@@ -1,23 +1,42 @@
-export type RejectionValue = string | number | object | null;
-
 export interface ErrorData {
   name: string;
   message: string;
   stack: string | undefined;
 }
 
-export interface LogData {
-  error?: ErrorData;
-  value?: RejectionValue;
+export interface ErrorLogData {
+  error: ErrorData;
   codeContexts?: CodeContext[];
   handled: boolean;
   timestamp: string;
   project_id: string;
+  method?: string;
+  path?: string;
 }
+
+export type RejectionValue =
+  | string
+  | number
+  | boolean
+  | object
+  | null
+  | undefined;
+
+  export interface RejectionLogData {
+    value: RejectionValue;
+    handled: boolean;
+    timestamp: string;
+    project_id: string;
+  }
 
 export interface CodeContext {
   file: string;
   line: number;
   column: number;
   context: string;
+}
+
+export interface Metadata {
+  method?: string;
+  url?: string;
 }
