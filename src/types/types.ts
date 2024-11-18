@@ -12,6 +12,9 @@ export interface ErrorLogData {
   project_id: string;
   method?: string;
   path?: string;
+  ip?: string;
+  os?: string;
+  browser?: string;
 }
 
 export type RejectionValue =
@@ -27,6 +30,9 @@ export type RejectionValue =
     handled: boolean;
     timestamp: string;
     project_id: string;
+    ip?: string;
+    os?: string;
+    browser?: string;
   }
 
 export interface CodeContext {

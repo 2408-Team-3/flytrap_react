@@ -1,6 +1,8 @@
 import axios from "axios";
 import { getConfig } from "../config";
 // import { FlytrapError } from '../utils/FlytrapError';
+import { getUserAgentDetails } from "../utils/userAgentInfo";
+import { getIpAddress } from "../utils/ipInfo";
 import { RejectionLogData, RejectionValue } from "../types/types";
 
 export const logRejection = async (
@@ -9,11 +11,17 @@ export const logRejection = async (
 ): Promise<void> => {
   const config = getConfig();
 
+  const { browser, os } = getUserAgentDetails();
+  const ip = await getIpAddress(); 
+
   const data: RejectionLogData = {
     value,
     handled,
     timestamp: new Date().toISOString(),
     project_id: config.projectId,
+    ip: ip,
+    os: os,
+    browser: browser,
   };
 
   try {

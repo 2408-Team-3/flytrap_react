@@ -2,6 +2,8 @@ import axios from "axios";
 import { parseStackTrace } from "../utils/stackTrace";
 import { readSourceFile } from "../utils/fileReader";
 import { getCodeContext } from "../utils/codeContext";
+import { getUserAgentDetails } from "../utils/userAgentInfo";
+import { getIpAddress } from "../utils/ipInfo";
 import { getConfig } from "../config";
 // import { FlytrapError } from '../utils/FlytrapError';
 import {
@@ -41,6 +43,9 @@ export const logError = async (
     codeContexts = contexts.filter(Boolean) as CodeContext[];
   }
 
+  const { browser, os } = getUserAgentDetails();
+  const ip = await getIpAddress(); 
+
   const data: ErrorLogData = {
     error: {
       name: error.name,
@@ -53,6 +58,9 @@ export const logError = async (
     project_id: config.projectId,
     method: metadata?.method,
     path: metadata?.url,
+    ip: ip,
+    os: os,
+    browser: browser,
   };
 
   try {
