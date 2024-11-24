@@ -5,13 +5,20 @@ import { getCodeContext } from "../utils/codeContext";
 import { getUserAgentDetails } from "../utils/userAgentInfo";
 import { getIpAddress } from "../utils/ipInfo";
 import { getConfig } from "../config";
-// import { FlytrapError } from '../utils/FlytrapError';
 import {
   ErrorLogData,
   CodeContext,
   Metadata as MetadataType,
 } from "../types/types";
 
+/**
+ * Logs an error to the Flytrap backend.
+ * Includes metadata such as stack trace, code context, user agent details, and IP address.
+ * @param error - The error object to log.
+ * @param handled - Indicates whether the error was explicitly handled.
+ * @param metadata - Additional metadata, such as HTTP method and URL (optional).
+ * @returns A promise that resolves when the log is sent or catches any error during the process.
+ */
 export const logError = async (
   error: Error,
   handled: boolean,
@@ -56,22 +63,20 @@ export const logError = async (
     handled,
     timestamp: new Date().toISOString(),
     project_id: config.projectId,
-    method: metadata?.method,
-    path: metadata?.url,
-    ip: ip,
-    os: os,
-    browser: browser,
+    method: metadata?.method || null,
+    path: metadata?.url || null,
+    ip,
+    os,
+    browser,
   };
 
   try {
-    console.log("[flytrap] Sending error to backend...");
-    const response = await axios.post(
+    await axios.post(
       `${config.apiEndpoint}/api/errors`,
       { data },
       { headers: { "x-api-key": config.apiKey } },
     );
-    console.log("[flytrap]", response.status, response.data);
-  } catch (e) {
-    console.warn("[flytrap] Failed to log error:", e);
+  } catch {
+    return;
   }
 };

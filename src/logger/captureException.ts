@@ -2,6 +2,13 @@ import { AxiosError } from "axios";
 import { logError } from "./logError";
 import { Metadata as MetadataType } from "../types/types";
 
+/**
+ * Captures an exception and logs it to the Flytrap backend.
+ * Automatically extracts metadata from Axios errors if applicable.
+ * @param error - The error object to capture.
+ * @param metadata - Additional metadata to include in the log (optional).
+ * @returns void
+ */
 export const captureException = (
   error: Error,
   metadata: MetadataType = {},
