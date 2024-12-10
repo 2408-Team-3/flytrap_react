@@ -8,6 +8,8 @@ This guide will walk you through setting up the Flytrap React SDK in your projec
 
 To learn more about Flytrap, check out our [case study](https://getflytrap.github.io/).
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## 🚀 Getting Started
 
 To start using Flytrap in your project:
@@ -23,6 +25,7 @@ Install the Flytrap React SDK via npm:
 ```bash
 npm install flytrap_react
 ```
+For more details about the package, visit the [Flytrap React SDK on npm](https://www.npmjs.com/package/flytrap_react).
 
 ## 🛠️ Usage
 1. **Initialize Flytrap:** In your main application file (e.g., `index.js` or `main.jsx`), import the Flytrap module and initialize it with your project credentials:
