@@ -119,17 +119,19 @@ const ProblematicComponent = () => {
   throw new Error("This error is caught by ErrorBoundary");
 };
 
-const App = () => (
+const App = () => {
   const handleUncaughtError = () => {
     throw new Error('This is an uncaught error from React!');
   }
 
-  <div>
-    <h1>Flytrap React SDK Demo</h1>
-    <button id="uncaughtErrorBtn" onClick={handleUncaughtError}>Trigger Uncaught Error</button>
-    <ProblematicComponent />
-  </div>
-);
+  return (
+    <div>
+      <h1>Flytrap React SDK Demo</h1>
+      <button id="uncaughtErrorBtn" onClick={handleUncaughtError}>Trigger Uncaught Error</button>
+      <ProblematicComponent />
+    </div>
+  );
+}
 
 export default App;
 ```
