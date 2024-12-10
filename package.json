@@ -10,6 +10,11 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getflytrap/flytrap_react"
+  },
+  "homepage": "https://getflytrap.github.io/",
   "scripts": {
     "build": "vite build"
   },
